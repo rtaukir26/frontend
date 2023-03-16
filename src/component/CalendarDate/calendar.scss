@@ -1,0 +1,18 @@
+.calendarWrap {
+  display: inline;
+  position: relative;
+  .inputBox {
+    font-size: 22px;
+    padding: 5px 8px 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+  .calendarElement {
+    position: absolute;
+    left: 50%;
+    font-size: 12px;
+    transform: translateX((-50%));
+    // top: 40px;
+    z-index: 999;
+  }
+}

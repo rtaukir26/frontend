@@ -1,0 +1,55 @@
+{
+  "myDummyData": [
+    [
+      {
+        "ecuName": "BCM",
+        "ecuStatus": "Active",
+        "ecuDescription": "This is active ecu"
+      }
+    ],
+    [
+      {
+        "ecuName": "BCM",
+        "ecuStatus": "Active",
+        "ecuDescription": "This is active ecu"
+      }
+    ],
+    [
+      {
+        "ecuName": "ABS",
+        "ecuStatus": "Active",
+        "ecuDescription": "This is active ecu"
+      }
+    ],
+    [
+      {
+        "ecuName": "ENGINE",
+        "ecuStatus": "In active",
+        "ecuDescription": "This is In active ecu"
+      }
+    ],
+    [
+      {
+        "ecuName": "PDS",
+        "ecuStatus": "Fault",
+        "ecuDescription": "This is Fault ecu"
+      }
+    ],
+    [
+      {
+        "ecuName": "HAC",
+        "ecuStatus": "Fault",
+        "ecuDescription": "This is Fault ecu"
+      }
+    ]
+  ],
+  "allEcusName": [
+    {
+      "ecuName": "BCM"
+    },
+    { "ecuName": "ABS" },
+    { "ecuName": "PDS" },
+    { "ecuName": "ENGINE" },
+    { "ecuName": "HAC" }
+  ]
+}
