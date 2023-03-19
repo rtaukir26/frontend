@@ -1,7 +1,16 @@
-.header_sec{
-    color: $main-black;
+.header_sec {
+  color: $main-black;
+  //   padding: 10px;
+  width: 100%;
+  .header_inside_div {
     background-color: aquamarine;
-    button{
-        background-color: $main-site-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header_right_div {
+      span {
+        font-size: 22px;
+      }
     }
+  }
 }

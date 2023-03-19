@@ -1,6 +1,13 @@
-.body_div {
+.body_outer_div {
   height: 100vh;
   width: 100%;
-  // background-color: rgb(214, 248, 248);
-  // text-align: center;
+  padding: 20px;
+
+  .body_inner_div {
+    // background-color: rgb(253, 253, 253);
+    border: 1px solid #ddd;
+    min-height: calc(100vh - 42px);
+  }
 }
+
+

@@ -2,9 +2,18 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="header_sec">
-      <div>header</div>
-    </div>
+    <section className="header_sec">
+      <div className="header_inside_div">
+        <div className="header_left_div">
+          <span>Logo</span>
+        </div>
+        <div className="header_right_div">
+          <span>Home</span>
+          <span>About</span>
+          <span>Contact</span>
+        </div>
+      </div>
+    </section>
   );
 };
 

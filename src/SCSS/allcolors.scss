@@ -2,5 +2,40 @@
 $main-white: #fff;
 $main-black: #000;
 $main-site-color: #e26935;
-$white-only: #fff;
-$black-only: #000;
+
+
+/*Sign up page*/
+$box-shadow-color:rgb(163, 155, 155);
+$bg-gradient-color:linear-gradient(87deg, #0c0b0aa3, #00eded7a);
+$header-color: #ffd04a;
+
+$Link-under-line-color:#0f0f0f;
+$Link-hover-color:rgb(22, 22, 22);
+
+$button-border:#00d5ffc9;
+$button-bg-hover:#00d5ff48;
+
+$input-border:#e7a66d;
+$input-placeholder-color:rgba(185, 177, 177, 0.918);
+
+
+
+/*home page*/
+$body-bg-color:rgb(255 255 255);
+
+
+
+
+
+
+
+
+
+
+
+/*body bg color*/
+$background-img: url("../assets/images/bg.jpg");
+.main_sec {
+  background-image: $background-img;
+  height: 100vh;
+}
