@@ -3,14 +3,44 @@ import { ReactComponent as UserEmailIcon } from "../../assets/images/userEmailWh
 import { ReactComponent as UserPwdIcon } from "../../assets/images/key-solid.svg";
 import { ReactComponent as UserConfrmPwdIcon } from "../../assets/images/key-solid-icon2.svg";
 import { Link } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import FormError from "../commonFormError/FormError";
+import { signUpValidationSchema } from "../commonFormError/validationSchema";
 
 const RegisterUser = () => {
+  const handleSubmit = async (values, action, errors) => {
+    console.log("values", values, errors);
+    action.resetForm();
+    // let result = await fetch("http://localhost:5000/api/register", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     name: values.name,
+    //     email: values.email,
+    //     password: values.password,
+    //   }),
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    // result =await result.json();
+    // console.log("backend result: ", result);
+    // localStorage.setItem("user",JSON.stringify(result))
+    // if(result)
+    // {
+    //   history("/")
+  };
+
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  };
+
   return (
     <div className="register_user_main_div">
       <div className="signup_user_div">
         <h5>Sign up</h5>
         <div>
-          <form action="" className="form_control">
+          {/* <form onSubmit={HandleSubmit} className="form_control">
             <div className="input_group">
               <UserIcon className="reactComponent" />
               <input
@@ -49,13 +79,88 @@ const RegisterUser = () => {
             </div>
 
             <div className="btn_d_flex">
-              <button>Submit</button>
+              <button type="submit">Submit</button>
 
               <Link>
                 <span>{`<< `}Login</span>
               </Link>
             </div>
-          </form>
+          </form> */}
+
+          <Formik
+            initialValues={initialValues}
+            validationSchema={signUpValidationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({
+              values,
+              error,
+              touched,
+              handleChange,
+              handleBlur,
+              handleReset,
+              isSubmitting,
+            }) => (
+              <Form className="form_control">
+                <div className="input_group">
+                  <UserIcon className="reactComponent" />
+
+                  <Field
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    placeholder="Plaese enter your name"
+                    autoComplete="off"
+                  />
+                  <FormError name="name" />
+                </div>
+
+                <div className="input_group">
+                  <UserEmailIcon className="reactComponent" />
+
+                  <Field
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    placeholder="Plaese enter your email"
+                    autoComplete="off"
+                  />
+                  <FormError name="email" />
+                </div>
+                <div className="input_group">
+                  <UserPwdIcon className="reactComponent" />
+
+                  <Field
+                    type="password"
+                    name="password"
+                    value={values.password}
+                    placeholder="Plaese enter your password"
+                    autoComplete="off"
+                  />
+                  <FormError name="password" />
+                </div>
+                <div className="input_group">
+                  <UserConfrmPwdIcon className="reactComponent" />
+
+                  <Field
+                    type="password"
+                    name="confirm_password"
+                    value={values.confirm_password}
+                    placeholder="Plaese enter your confirm password"
+                    autoComplete="off"
+                  />
+                  <FormError name="confirm_password" />
+                </div>
+                <div className="btn_d_flex">
+                  <button type="submit">Signup</button>
+
+                  <Link>
+                    <span>{`<< `}Login</span>
+                  </Link>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

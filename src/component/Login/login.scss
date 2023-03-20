@@ -1,0 +1,19 @@
+.login_div {
+  div {
+    form {
+      .forget_password_div {
+        text-align: center;
+        a:first-child {
+          color: #dfcccc;
+          padding-right: 8px;
+        }
+
+        a:last-child {
+          color: #c9c9c9;
+          padding-left: 8px;
+          border-left: 1px solid;
+        }
+      }
+    }
+  }
+}
