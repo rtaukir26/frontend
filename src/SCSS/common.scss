@@ -6,7 +6,7 @@
   font-family: monospace;
 }
 
-@import "../SCSS//allcolors.scss";
+@import "../SCSS/allcolors.scss";
 $baseFontSize: 16px;
 
 html {
@@ -18,7 +18,8 @@ html {
 
 body {
   font-family: "monospace";
-  background-color: $body-bg-color;
+  // background-color: $body-bg-color;
+  background-image: url("../assets/images/bg.jpg");
   // letter-spacing: 0.5px;
   // .light-theme {
   //     background-color: #282828;

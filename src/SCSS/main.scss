@@ -3,7 +3,7 @@
 // 2.  create main.scss and import common.scss file
 // 3.  for colors & background-color, create allcolors.scss file and define color variables,then step 4
 // 4.  then create "allColor-files.scss" and import the allcolors.scss
-// 5.  in main.scss, import allcolors.scss file & then make some class name like "light-theme" and inside class name import allColor-files.scss
+// 5.  in main.scss, import allcolors.scss file & then make some class name like "light-theme" and inside className import allColor-files.scss
 // 6.  in index.js file, import the main.scss file
 
 @import "./common.scss";
@@ -12,5 +12,5 @@
 .light-theme {
   @import "./allColor-files.scss";
 }
-@import "../component/RegisterUser/registerUser.scss";
-@import "../component//Login/login.scss";
+@import "../pages/RegisterUser/registerUser.scss";
+@import "../pages/Login/login.scss";

@@ -4,12 +4,11 @@ import { ReactComponent as UserPwdIcon } from "../../assets/images/key-solid.svg
 import { ReactComponent as UserConfrmPwdIcon } from "../../assets/images/key-solid-icon2.svg";
 import { Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
-import FormError from "../commonFormError/FormError";
-import { signUpValidationSchema } from "../commonFormError/validationSchema";
+import FormError from "../../component/commonFormError/FormError";
+import { signUpValidationSchema } from "../../component/commonFormError/validationSchema/index";
 
 const RegisterUser = () => {
   const handleSubmit = async (values, action, errors) => {
-    console.log("values", values, errors);
     action.resetForm();
     // let result = await fetch("http://localhost:5000/api/register", {
     //   method: "POST",
@@ -154,7 +153,7 @@ const RegisterUser = () => {
                 <div className="btn_d_flex">
                   <button type="submit">Signup</button>
 
-                  <Link>
+                  <Link to="/login">
                     <span>{`<< `}Login</span>
                   </Link>
                 </div>
