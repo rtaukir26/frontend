@@ -19,7 +19,16 @@ html {
 body {
   font-family: "monospace";
   // background-color: $body-bg-color;
+  // background-image: url("../assets/images/bg3.avif");
+  // background-image: url("../assets/images/bg2.jpg");
+  // background-image: url("photographer.jpg"); /* The image used */
+  // background-image: url("../assets/images/bg4.avif");
   background-image: url("../assets/images/bg.jpg");
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 100vh; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
   // letter-spacing: 0.5px;
   // .light-theme {
   //     background-color: #282828;
@@ -60,7 +69,7 @@ input {
   height: 35px;
   outline: none;
   border: none;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 4px;
   background: transparent;
   padding: 10px;
@@ -83,19 +92,19 @@ input {
   height: 10px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f4f4f4;
-  border-radius: 5px;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #f4f4f4;
+//   border-radius: 5px;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #bbd6ff;
-  border-radius: 5px;
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #bbd6ff;
+//   border-radius: 5px;
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #1b6fee;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #1b6fee;
+// }

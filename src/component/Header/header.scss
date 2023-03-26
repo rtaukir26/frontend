@@ -1,15 +1,88 @@
 .header_sec {
-  color: $main-black;
-  //   padding: 10px;
+  box-shadow: 0px 1px 2px 0px $navbar-shadow;
   width: 100%;
   .header_inside_div {
-    background-color: aquamarine;
+    background-color: $main-white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 15px;
     .header_right_div {
       span {
-        font-size: 22px;
+        font-size: 20px;
+        margin-left: 10px;
+        color: $main-black;
+        transition: all 0.3s;
+        border-bottom: 3px solid $main-white;
+      }
+
+      .logout_span {
+        position: relative;
+        ul {
+          position: absolute;
+          background: $main-white;
+          width: 350px;
+          z-index: 1;
+          box-shadow: 0px -5px 10px $logout-shadow;
+          list-style: none;
+          visibility: hidden;
+          // visibility: visible;
+          opacity: 0;
+          transition: 0.3s ease all;
+          right: -12px;
+          top: 41px;
+          border-radius: 3px;
+          padding: 15px;
+          &::before {
+            content: "";
+            position: absolute;
+            top: -11px;
+            right: 19px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid $navbar-shadow;
+          }
+          div:first-child {
+            span:last-child {
+              border-left: 2px solid $navbar-shadow;
+              padding-left: 10px;
+            }
+          }
+          div:last-child {
+            margin-top: 20px;
+
+            p {
+              text-align: center;
+              // font-weight: 900;
+              font-size: 17px;
+              // border-bottom: 2px solid #ff00bc;
+            }
+            div {
+              text-align: center;
+              button {
+                width: 100px;
+                margin-right: 10px;
+                color: $main-black;
+                border: none;
+              }
+              button:first-child{
+                background-color: $button-no-color;
+              }
+              button:last-child{
+                background-color: $button-yes-color;
+              }
+            }
+          }
+        }
+        &:focus ul {
+          // top: 41px;
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      span:hover {
+        border-bottom: 3px solid $navbar-shadow;
+        cursor: pointer;
       }
     }
   }

@@ -1,19 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import Header from "../../component/Header/Header";
+import Products from "../../component/Products.js/Products";
+import { getAllProductsApi } from "../../service/dashBoard";
 
-import Header from "../../component/Header/Header"
-
-import "./home.scss";
 const Home = () => {
-  
+  const [allProductsApi, setAllProductsApi] = useState({
+    loading: true,
+    Products: {},
+    error: "",
+  });
 
+  // console.log("allProducts api", allProductsApi);
+
+  useEffect(() => {
+    getAllProductsApi()
+      .then((res) => {
+        if (res.status === 200) {
+          setAllProductsApi({
+            loading: false,
+            Products: res?.data?.products,
+            error: "",
+          });
+          // dispatch(getAllProductsRedux(res));
+        } else {
+          setAllProductsApi({
+            loading: true,
+            Products: [],
+            // error: res.message,
+            error: "Network Error",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <section className="main_sec">
       <div className="body_outer_div">
-        <div className="body_inner_div">Home
-        <Header/>
-        <Link to="/login">Back</Link>
+        <div className="body_inner_div">
+          <Header />
+          <Products allProductsApi={allProductsApi} />
         </div>
       </div>
     </section>

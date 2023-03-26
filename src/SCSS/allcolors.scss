@@ -2,6 +2,8 @@
 $main-white: #fff;
 $main-black: #000;
 $main-site-color: #e26935;
+$button-no-color:#ff3e3e;
+$button-yes-color:#54ff3e;
 
 
 /*Sign up page*/
@@ -23,6 +25,10 @@ $input-placeholder-color:rgba(185, 177, 177, 0.918);
 /*home page*/
 $body-bg-color:rgb(255 255 255);
 
+/*Header page*/
+$navbar-shadow:#ff00bc;;
+$logout-shadow:rgba(0, 0, 0, 0.2);
+
 
 
 
@@ -34,8 +40,13 @@ $body-bg-color:rgb(255 255 255);
 
 
 /*body bg color*/
-$background-img: url("../assets/images/bg.jpg");
+// $background-img: url("../assets/images/homeBg2.jpg");
+// $background-img: url("../assets/images/bg5.avif");
+$background-img: url("../assets/images/homeBg6.webp");
 .main_sec {
   background-image: $background-img;
-  height: 100vh;
+  height: 100vh; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
 }
