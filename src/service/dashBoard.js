@@ -14,3 +14,22 @@ export const getAllProductsApi = async () => {
     return error;
   }
 };
+
+export const loginUser = async (userInputValue) => {
+  try {
+    return await axios.post(
+      apiEndpoints.login,
+      {
+        email: userInputValue.email,
+        password: userInputValue.password,
+      },
+      {
+        headers: {
+          "Content-type": "Application/json",
+        },
+      }
+    );
+  } catch (err) {
+    return err;
+  }
+};

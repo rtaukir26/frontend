@@ -15,9 +15,17 @@ const Header = () => {
     <section className="header_sec">
       <div className="header_inside_div">
         <div className="header_left_div">
-          {/* <img src={BrandLogo} alt="brandLogo" /> */}
-          <i className="fa-brands fa-drupal fa-2xl fa-regular"></i>
-          <span>Ind Express</span>
+          <span>
+            <i className="fa-brands fa-drupal fa-2xl fa-regular"></i>
+            <span>Ind Express</span>
+          </span>
+          <input
+            type="search"
+            className="search_input"
+            name="search"
+            id="search"
+            placeholder="search your product"
+          />
         </div>
         <div className="header_right_div">
           <Link to="/">

@@ -10,7 +10,7 @@
     padding: 15px;
     background-image: $bg-gradient-color;
     h5 {
-      color:$header-color;
+      color: $header-color;
       border-bottom: 2px solid;
       padding-bottom: 6px;
       width: 18%;
@@ -29,6 +29,11 @@
           .reactComponent {
             position: absolute;
             right: 3%;
+          }
+          .eyeOpen {
+            position: absolute;
+            right: 3%;
+            top: 4px;
           }
         }
       }

@@ -7,6 +7,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
+    .header_left_div{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      .search_input{
+        border: 2px solid $navbar-shadow;
+        color: $main-black;
+        width: 400px;
+        margin-left: 20px;
+        font-weight: 600;
+      }
+      ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $input-placeholder-color;
+        font-size: 18px;
+        opacity: 1; /* Firefox */
+        font-weight: lighter;
+      }
+    }
     .header_right_div {
       span {
         font-size: 20px;

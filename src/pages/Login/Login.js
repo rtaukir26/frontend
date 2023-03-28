@@ -1,10 +1,12 @@
 import { ReactComponent as UserEmailIcon } from "../../assets/images/userEmailWhite.svg";
 import { ReactComponent as UserPwdIcon } from "../../assets/images/key-solid.svg";
+import { ReactComponent as OpenEyeIcon } from "../../assets/images/eye-regular.svg";
+import { ReactComponent as OpenEyeSlashIcon } from "../../assets/images/eye-slash-regular.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loginUser } from "../../service/dashBoard";
 
 const initialState = {
   email: "",
@@ -14,27 +16,17 @@ const initialState = {
 
 const Login = () => {
   const [userInputValue, setUserInputValue] = useState(initialState);
-  // const [userInputValueEmail, setUserInputValueEmail] = useState("");
-  // const [userInputValuePwd, setUserInputValuePwd] = useState("");
+  const [isPwdHideShow, setIsPwdHideShow] = useState(true);
 
   // const { email, password, errors } = userInputValue;
 
   const history = useNavigate();
 
-  //===handle input
-  // const handleChangeEmail = (e) => {
-  //   setUserInputValueEmail(e.target.value);
-  // };
-  // const handleChangePwd = (e) => {
-  //   setUserInputValuePwd(e.target.value);
-  // };
   const handleChange = (e) => {
-    // const { name, value } = e.target;
     setUserInputValue((pre) => {
       return { ...pre, [e.target.name]: e.target.value };
     });
   };
-  console.log("userInputValue", userInputValue);
   const notify = (msg) =>
     toast.error(msg, {
       position: "top-right",
@@ -48,43 +40,34 @@ const Login = () => {
     });
   //====handle submit
   const handleSubmit = async (e) => {
-    console.log("userInputValue", userInputValue);
     e.preventDefault();
     if (validateForm()) {
-      try {
-        const result = await axios.post(
-          "http://localhost:4000/api/v1/login",
-          // { email: userInputValueEmail, password: userInputValuePwd },
-          { email: userInputValue.email, password: userInputValue.password },
-          {
-            headers: {
-              // Accept: "application/json, text/plain",
-              "Content-Type": "application/json",
-            },
+      loginUser(userInputValue)
+        .then((res) => {
+          console.log("res res", res);
+          if (res?.status === 200) {
+            notify("Login successfull");
+
+            localStorage.setItem(
+              "access_token",
+              JSON.stringify(res?.data?.token)
+            );
+            history("/");
+          } else if (res?.message === "Network Error") {
+            notify(res?.message);
+          } else {
+            notify("Invalid email & password");
           }
-        );
-        if (result?.status === 200) {
-          notify("Login successful");
-
-          localStorage.setItem(
-            "access_token",
-            JSON.stringify(result?.data?.token)
-          );
-          history("/");
-          console.log("userInputValue result", result);
-        }
-      } catch (error) {
-        if (error.message === "Network Error") {
-          notify(error.message);
-        } else {
-          notify("Invalid email & password");
-        }
-
-        console.log("userInputValue err", error);
-
-        return error;
-      }
- 
+        })
+        .catch((err) => {
+          console.log("res err", err);
+          if (err.message === "Network Error") {
+            notify(err.message);
+          }
+          //  else {
+          //   notify("Invalid email & password");
+          // }
+        });
     } else {
       setUserInputValue({ errors: userInputValue.errors });
     }
@@ -108,13 +91,24 @@ const Login = () => {
   //===handle Focus
   const handleFocus = (e) => {
     userInputValue.errors[e.target.name] = "";
-    setUserInputValue({ ...userInputValue,errors: userInputValue?.errors });
+    setUserInputValue({ ...userInputValue, errors: userInputValue?.errors });
   };
   //===handle Blur
   const handleBlur = (e) => {
     if (e.target.value === "") {
       userInputValue.errors[e.target.name] = `${e.target.name} is required..`;
-      setUserInputValue({ ...userInputValue,errors: userInputValue?.errors });
+      setUserInputValue({ ...userInputValue, errors: userInputValue?.errors });
+    }
+  };
+  const handleClickPwdHideShow = () => {
+    let textType = document.getElementById("password").getAttribute("type");
+    setIsPwdHideShow(!isPwdHideShow);
+    if (textType === "password") {
+      document.getElementById("password").removeAttribute("type", "password");
+      document.getElementById("password").setAttribute("type", "text");
+    } else {
+      document.getElementById("password").removeAttribute("type", "text");
+      document.getElementById("password").setAttribute("type", "password");
     }
   };
 
@@ -160,7 +154,14 @@ const Login = () => {
                   </span>
                 </div>
                 <div className="input_group">
-                  <UserPwdIcon className="reactComponent" />
+                  {/* <UserPwdIcon className="reactComponent" /> */}
+                  <span onClick={handleClickPwdHideShow}>
+                    {isPwdHideShow ? (
+                      <OpenEyeIcon className="eyeOpen" />
+                    ) : (
+                      <OpenEyeSlashIcon className="eyeOpen" />
+                    )}
+                  </span>
                   <input
                     type="password"
                     placeholder="Enter your password"
