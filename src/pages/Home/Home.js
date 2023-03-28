@@ -15,7 +15,8 @@ const Home = () => {
   useEffect(() => {
     getAllProductsApi()
       .then((res) => {
-        if (res.status === 200) {
+        console.log("res",res)
+        if (res?.status === 200) {
           setAllProductsApi({
             loading: false,
             Products: res?.data?.products,

@@ -14,47 +14,48 @@ const initialState = {
 
 const Login = () => {
   const [userInputValue, setUserInputValue] = useState(initialState);
-  const [userInputValueEmail, setUserInputValueEmail] = useState("");
-  const [userInputValuePwd, setUserInputValuePwd] = useState("");
+  // const [userInputValueEmail, setUserInputValueEmail] = useState("");
+  // const [userInputValuePwd, setUserInputValuePwd] = useState("");
 
   // const { email, password, errors } = userInputValue;
 
   const history = useNavigate();
 
   //===handle input
-  const handleChangeEmail = (e) => {
-    setUserInputValueEmail(e.target.value);
-  };
-  const handleChangePwd = (e) => {
-    setUserInputValuePwd(e.target.value);
-  };
-  // const handleChange = (e) => {
-  //   // const { name, value } = e.target;
-  //   setUserInputValue({
-  //     ...userInputValue,
-  //     [e.target.name]: e.target.value,
-  //   });
+  // const handleChangeEmail = (e) => {
+  //   setUserInputValueEmail(e.target.value);
   // };
-
+  // const handleChangePwd = (e) => {
+  //   setUserInputValuePwd(e.target.value);
+  // };
+  const handleChange = (e) => {
+    // const { name, value } = e.target;
+    setUserInputValue((pre) => {
+      return { ...pre, [e.target.name]: e.target.value };
+    });
+  };
+  console.log("userInputValue", userInputValue);
   const notify = (msg) =>
-  toast.error(msg, {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
     });
   //====handle submit
   const handleSubmit = async (e) => {
+    console.log("userInputValue", userInputValue);
     e.preventDefault();
     if (validateForm()) {
       try {
         const result = await axios.post(
           "http://localhost:4000/api/v1/login",
-          { email: userInputValueEmail, password: userInputValuePwd },
+          // { email: userInputValueEmail, password: userInputValuePwd },
+          { email: userInputValue.email, password: userInputValue.password },
           {
             headers: {
               // Accept: "application/json, text/plain",
@@ -70,42 +71,26 @@ const Login = () => {
             JSON.stringify(result?.data?.token)
           );
           history("/");
-          console.log("res result", result);
+          console.log("userInputValue result", result);
         }
       } catch (error) {
-        // toast("Wow so easy!");
-        notify("Invalid email & password");
+        if (error.message === "Network Error") {
+          notify(error.message);
+        } else {
+          notify("Invalid email & password");
+        }
 
-        console.log("res err", error);
+        console.log("userInputValue err", error);
 
         return error;
       }
-      //   } else {
-      //     setUserInputValue({ errors: userInputValue.errors });
-      //   }
-      //   console.log("userInputValue", userInputValue);
-
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: {
-      //     // Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     // Authorization: "Bearer my-token",
-      //     // "My-Custom-Header": "foobar",
-      //   },
-      //   body: JSON.stringify({
-      //     email: userInputValueEmail,
-      //     password: userInputValuePwd,
-      //   }),
-      // };
-      // fetch("http://localhost:4000/api/v1/login", requestOptions)
-      //   .then((response) => response.json())
-      //   .then((res) => console.log("ress", res));
+ 
+    } else {
+      setUserInputValue({ errors: userInputValue.errors });
     }
   };
 
   //====form validation
-
   const validateForm = () => {
     let isValid = true;
     if (userInputValue.email === "") {
@@ -123,13 +108,13 @@ const Login = () => {
   //===handle Focus
   const handleFocus = (e) => {
     userInputValue.errors[e.target.name] = "";
-    setUserInputValue({ errors: userInputValue?.errors });
+    setUserInputValue({ ...userInputValue,errors: userInputValue?.errors });
   };
   //===handle Blur
   const handleBlur = (e) => {
     if (e.target.value === "") {
       userInputValue.errors[e.target.name] = `${e.target.name} is required..`;
-      setUserInputValue({ errors: userInputValue?.errors });
+      setUserInputValue({ ...userInputValue,errors: userInputValue?.errors });
     }
   };
 
@@ -161,11 +146,11 @@ const Login = () => {
                     placeholder="Enter your email"
                     name="email"
                     id="email"
-                    // value={userInputValue?.email}
-                    value={userInputValueEmail}
+                    value={userInputValue?.email}
+                    // value={userInputValueEmail}
                     className="inputBox"
-                    // onChange={handleChange}
-                    onChange={handleChangeEmail}
+                    onChange={handleChange}
+                    // onChange={handleChangeEmail}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                   />
@@ -181,11 +166,11 @@ const Login = () => {
                     placeholder="Enter your password"
                     name="password"
                     id="password"
-                    value={userInputValuePwd}
-                    // value={userInputValue?.password}
+                    // value={userInputValuePwd}
+                    value={userInputValue?.password}
                     className="inputBox"
-                    // onChange={handleChange}
-                    onChange={handleChangePwd}
+                    onChange={handleChange}
+                    // onChange={handleChangePwd}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                   />
@@ -204,7 +189,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="btn_d_flex">
-                  <button type="submit">Login</button>
+                  <button>Login</button>
                   {/* <button ><Link to="/">Login</Link></button> */}
                 </div>
               </form>
