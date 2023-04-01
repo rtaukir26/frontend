@@ -1,5 +1,6 @@
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
 import FullPageLoader from "../FullPageLoader/FullPageLoader";
+import RatingStar from "../RatingStar/RatingStar";
 
 const Products = ({ allProductsApi }) => {
   return (
@@ -14,13 +15,18 @@ const Products = ({ allProductsApi }) => {
           </>
         ) : allProductsApi?.Products?.length > 0 ? (
           <div className="product_body">
-            {allProductsApi?.Products?.map((item,i) => (
+            {allProductsApi?.Products?.map((item, i) => (
               <div key={i} className="card">
                 <h5>{item.name}</h5>
                 <p>{item.category}</p>
                 <p>{item.description}</p>
-                <p>{item.rating}</p>
-                <p>{item.price}</p>
+                {/* <p>{item.rating}</p> */}
+                <RatingStar value={item.rating} />
+                <p> <strong>Price &#8377;</strong>{item.price}</p>
+                <div className="btn_grp">
+                  <button>Add to cart</button>
+                  <button>Buy now</button>
+                </div>
               </div>
             ))}
           </div>
