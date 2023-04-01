@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
 import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import RatingStar from "../RatingStar/RatingStar";
 
 const Products = ({ allProductsApi }) => {
+  const history=useNavigate()
+  const handleClickGetSingleProductInfo=(item)=>{
+    history(`/product/${item._id}`)
+  }
+
+
   return (
     <div>
       <div>
@@ -20,11 +27,10 @@ const Products = ({ allProductsApi }) => {
                 <h5>{item.name}</h5>
                 <p>{item.category}</p>
                 <p>{item.description}</p>
-                {/* <p>{item.rating}</p> */}
                 <RatingStar value={item.rating} />
                 <p> <strong>Price &#8377;</strong>{item.price}</p>
                 <div className="btn_grp">
-                  <button>Add to cart</button>
+                  <button onClick={()=>handleClickGetSingleProductInfo(item)}>Add to cart</button>
                   <button>Buy now</button>
                 </div>
               </div>

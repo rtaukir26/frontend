@@ -9,7 +9,6 @@ import { useState } from "react";
 const Header = () => {
   const history = useNavigate();
   const [userInfo, setUserInfo] = useState({});
-  console.log("userInfo", userInfo);
 
   //===logout
   const handleClickLogout = () => {
@@ -27,6 +26,7 @@ const Header = () => {
     <section className="header_sec">
       <div className="header_inside_div">
 
+        {/* =======left div======= */}
         <div className="header_left_div">
           <span>
             <i className="fa-brands fa-drupal fa-2xl fa-regular"></i>
@@ -45,6 +45,7 @@ const Header = () => {
           </div>
         </div>
 
+        {/* =======middle div======= */}
         <div className="header_middle_div">
           <Link to="/">
             <span>Home</span>
@@ -59,10 +60,11 @@ const Header = () => {
           </Link>
         </div>
 
+        {/* =======right div======= */}
         <div className="header_right_div">
           <span className="cart_span">
             <span>12</span>
-            <i class="fa-solid fa-cart-plus fa-xl"></i>
+            <i className="fa-solid fa-cart-plus fa-xl"></i>
           </span>
           <span className="logout_span" tabIndex="0">
             <LogOutIcon />
