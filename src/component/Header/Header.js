@@ -1,33 +1,51 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as UserIcon } from "../../assets/images/user-tie-solid.svg";
 import { ReactComponent as LogOutIcon } from "../../assets/images/logOutIcon.svg";
-// import BrandLogo from "../../assets/images/drupal.svg";
-// import UserIcon from "../../assets/images/user-tie-solid.svg";
+import userProfileIcon from "../../assets/images/user.png";
+import searchIcon from "../../assets/images/loupe.png";
+import editIcon from "../../assets/images/edit.png";
+import { useState } from "react";
 
 const Header = () => {
   const history = useNavigate();
+  const [userInfo, setUserInfo] = useState({});
+  console.log("userInfo", userInfo);
 
+  //===logout
   const handleClickLogout = () => {
+    localStorage.removeItem("access_token")
     history("/login");
+  };
+
+  //===getUserDetails
+  const getUserDetails = () => {
+    let userData = JSON.parse(localStorage.getItem("user"));
+    setUserInfo(userData);
   };
 
   return (
     <section className="header_sec">
       <div className="header_inside_div">
+
         <div className="header_left_div">
           <span>
             <i className="fa-brands fa-drupal fa-2xl fa-regular"></i>
             <span>Ind Express</span>
           </span>
-          <input
-            type="search"
-            className="search_input"
-            name="search"
-            id="search"
-            placeholder="search your product"
-          />
+          <div>
+            <input
+              type="search"
+              className="search_input"
+              name="search"
+              id="search"
+              placeholder="search your product"
+            />
+            <img src={searchIcon} alt="search" />
+            {/* <i class="fa-solid fa-magnifying-glass fa-lg"></i> */}
+          </div>
         </div>
-        <div className="header_right_div">
+
+        <div className="header_middle_div">
           <Link to="/">
             <span>Home</span>
           </Link>
@@ -39,7 +57,13 @@ const Header = () => {
           <Link to="/contact">
             <span>Contact</span>
           </Link>
-          {/* <span className="logout_span" onClick={handleClickLogout}> <LogOutIcon /></span> */}
+        </div>
+
+        <div className="header_right_div">
+          <span className="cart_span">
+            <span>12</span>
+            <i class="fa-solid fa-cart-plus fa-xl"></i>
+          </span>
           <span className="logout_span" tabIndex="0">
             <LogOutIcon />
             <ul className="">
@@ -58,11 +82,30 @@ const Header = () => {
               </div>
             </ul>
           </span>
-          {/* <img src={UserIcon} alt="use-icon" /> */}
-          <span>
-            <UserIcon />
+          <span
+            className="user_details_span"
+            tabIndex="0"
+            onClick={getUserDetails}
+          >
+            {/* <UserIcon /> */}
+            <img src={userProfileIcon} alt="user-icon" />
+
+            <ul>
+              <div>
+                <img src={userProfileIcon} alt="user-icon" />
+                <strong>{userInfo.name}</strong>
+              </div>
+              {/* <li>{userInfo.name}</li> */}
+              <li>{userInfo.email}</li>
+              <li>+91 7356875566</li>
+              <li>
+                <img src={editIcon} alt="edit" />
+                update profile
+              </li>
+            </ul>
           </span>
         </div>
+        
       </div>
     </section>
   );

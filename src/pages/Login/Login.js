@@ -52,6 +52,10 @@ const Login = () => {
               "access_token",
               JSON.stringify(res?.data?.token)
             );
+            localStorage.setItem(
+              "user",
+              JSON.stringify(res?.data?.userFullDetails)
+            );
             history("/");
           } else if (res?.message === "Network Error") {
             notify(res?.message);
@@ -100,6 +104,7 @@ const Login = () => {
       setUserInputValue({ ...userInputValue, errors: userInputValue?.errors });
     }
   };
+  //===pwd hide/show
   const handleClickPwdHideShow = () => {
     let textType = document.getElementById("password").getAttribute("type");
     setIsPwdHideShow(!isPwdHideShow);

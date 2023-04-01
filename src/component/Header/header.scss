@@ -7,11 +7,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    .header_left_div{
+    .header_left_div {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      .search_input{
+      div {
+        position: relative;
+        .fa-magnifying-glass {
+          position: absolute;
+          top: 43%;
+          right: 1%;
+        }
+        img {
+          width: 23px;
+          position: absolute;
+          right: 5px;
+          top: 5px;
+        }
+      }
+      .search_input {
         border: 2px solid $navbar-shadow;
         color: $main-black;
         width: 400px;
@@ -26,7 +40,7 @@
         font-weight: lighter;
       }
     }
-    .header_right_div {
+    .header_middle_div {
       span {
         font-size: 20px;
         margin-left: 10px;
@@ -34,9 +48,41 @@
         transition: all 0.3s;
         border-bottom: 3px solid $main-white;
       }
-
+      span:hover {
+        border-bottom: 3px solid $navbar-shadow;
+        cursor: pointer;
+      }
+    }
+    .header_right_div {
+      span {
+        margin-left: 15px;
+      }
+      .cart_span {
+        position: relative;
+        cursor: pointer;
+        span {
+          position: absolute;
+          background-color: #504949;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          text-align: center;
+          color: #fff;
+          font-size: 12px;
+          top: -18px;
+          right: -8px;
+        }
+      }
+      // .cart_span::before{
+      //   content: "";
+      //   position: absolute;
+      //   width: 30px;
+      //   height: 30px;
+      //   background-color: aqua;
+      // }
       .logout_span {
         position: relative;
+        cursor: pointer;
         ul {
           position: absolute;
           background: $main-white;
@@ -84,10 +130,10 @@
                 color: $main-black;
                 border: none;
               }
-              button:first-child{
+              button:first-child {
                 background-color: $button-no-color;
               }
-              button:last-child{
+              button:last-child {
                 background-color: $button-yes-color;
               }
             }
@@ -99,9 +145,53 @@
           opacity: 1;
         }
       }
-      span:hover {
-        border-bottom: 3px solid $navbar-shadow;
+      .user_details_span {
+        position: relative;
         cursor: pointer;
+        img{
+          width: 27px;
+          border-bottom: 2px solid pink;
+        }
+        ul {
+          position: absolute;
+          background: $main-white;
+          width: 350px;
+          z-index: 1;
+          box-shadow: 0px -5px 10px $logout-shadow;
+          list-style: none;
+          // visibility: visible;
+          visibility: hidden;
+          opacity: 0;
+          transition: 0.3s ease all;
+          right: -12px;
+          top: 41px;
+          border-radius: 3px;
+          padding: 15px;
+          &::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid #ff00bc;
+          }
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          li{
+            img{
+              width: 15px;
+              margin-right: 10px;
+            }
+          }
+        }
+        &:focus ul {
+          visibility: visible;
+          opacity: 1;
+        }
       }
     }
   }
