@@ -38,13 +38,13 @@ button {
   border: 2px solid $button-border;
   font-size: 20px;
   padding: 3px;
-  color: $main-white;
+  color: $main-black;
   letter-spacing: 1px;
   transition: all 0.3s;
 }
 button:hover {
   background-color: $button-bg-hover;
-  color: $main-black;
+  // color: $main-white;
 }
 
 a {
