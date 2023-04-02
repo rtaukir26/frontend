@@ -10,7 +10,6 @@ const Home = () => {
     error: "",
   });
 
-  // console.log("allProducts api", allProductsApi);
 
   useEffect(() => {
     getAllProductsApi()
