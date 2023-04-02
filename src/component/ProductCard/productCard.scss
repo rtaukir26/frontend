@@ -1,0 +1,75 @@
+.product_details_div {
+  margin-top: 15px;
+  height: 84vh;
+//   background-color: $main_white;
+  background-color: #ffffffed;
+  .product_card {
+    display: flex;
+    padding: 20px;
+    .card_left_img_div {
+      width: 25%;
+      padding: 5px;
+      img {
+        max-width: 100%;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px $logout-shadow;
+      }
+    }
+    .card_right_product_info {
+      width: 75%;
+      padding: 5px 5px 5px 20px;
+      margin-left: 10px;
+      border-left: 1px solid $button-border;
+      .quantity_div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        strong:nth-child(1) {
+          background-color: $quantity-bg;
+          margin-right: 10px;
+          padding: 5px;
+        }
+        strong:nth-child(5) {
+          font-size: 20px;
+        //   background-color: $quantity-bg;
+          background-color: $button-border;
+          margin-left: 10px;
+          padding: 5px;
+          font-family: monospace;
+        }
+        span:nth-child(2) {
+          padding: 5px;
+          background-color: $qtyIncrDecr-bg;
+          width: 25px;
+          text-align: center;
+          cursor: pointer;
+          border-radius: 7px 0px 0px 7px;
+        }
+        span:nth-child(3) {
+          background-color: $qtyValue;
+          padding: 5px;
+          font-weight: bolder;
+          // margin: 0px 10px;
+          width: 35px;
+          text-align: center;
+        }
+        span:nth-child(4) {
+          background-color: $qtyIncrDecr-bg;
+          width: 25px;
+          text-align: center;
+          cursor: pointer;
+          padding: 5px;
+          border-radius: 0 7px 7px 0;
+          // font-weight: bolder;
+          // margin: 0px 10px;
+        }
+      }
+      button {
+        margin-right: 10px;
+      }
+
+      // background-color: green;
+      // border: 1px solid grey;
+    }
+  }
+}
