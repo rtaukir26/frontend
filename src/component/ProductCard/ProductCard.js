@@ -4,14 +4,15 @@ import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
 
 const ProductCard = ({ setProductInfo, productInfo }) => {
-  //handleClick Incr product Qty
+  
+    //==handleClick Incr product Qty
   const handleClickIncrQty = () => {
     productInfo.product.quantities += 1;
     setProductInfo((productInfo) => {
       return { ...productInfo };
     });
   };
-  //handleClick Decr product Qty
+  //==handleClick Decr product Qty
   const handleClickDecrQty = () => {
     if (productInfo.product.quantities > 1) {
       productInfo.product.quantities -= 1;

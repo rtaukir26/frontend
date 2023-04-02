@@ -42,6 +42,8 @@ const SingleProduct = () => {
         return err;
         // console.log("err",err);
       });
+    // below line stoping the warning of "React Hook useEffect has a missing dependency"
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("productInfo", productInfo);
 
@@ -50,7 +52,10 @@ const SingleProduct = () => {
       <div className="body_outer_div">
         <div className="body_inner_div">
           <Header />
-          <ProductCard setProductInfo={setProductInfo} productInfo={productInfo} />
+          <ProductCard
+            setProductInfo={setProductInfo}
+            productInfo={productInfo}
+          />
         </div>
       </div>
     </section>
