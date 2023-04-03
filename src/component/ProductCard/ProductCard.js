@@ -21,7 +21,7 @@ const ProductCard = ({ setProductInfo, productInfo }) => {
       });
     }
   };
-  console.log("productInfo ", productInfo);
+//   console.log("productInfo ", productInfo);
 
   return (
     <div className="product_details_div ">

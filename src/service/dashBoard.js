@@ -40,3 +40,10 @@ export const getSingleProductApi = async (productId) => {
     return error;
   }
 };
+export const getAllSelecedProducts = async () => {
+  try {
+    return await axios.get(apiEndpoints.allSelecedProducts);
+  } catch (error) {
+    return error;
+  }
+};

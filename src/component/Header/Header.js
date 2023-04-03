@@ -5,6 +5,7 @@ import userProfileIcon from "../../assets/images/user.png";
 import searchIcon from "../../assets/images/loupe.png";
 import editIcon from "../../assets/images/edit.png";
 import { useState } from "react";
+import { routePaths } from "../../routes/routePaths";
 
 const Header = () => {
   const history = useNavigate();
@@ -12,8 +13,8 @@ const Header = () => {
 
   //===logout
   const handleClickLogout = () => {
-    localStorage.removeItem("access_token")
-    history("/login");
+    localStorage.removeItem("access_token");
+    history(routePaths.login);
   };
 
   //===getUserDetails
@@ -21,11 +22,15 @@ const Header = () => {
     let userData = JSON.parse(localStorage.getItem("user"));
     setUserInfo(userData);
   };
+  
+  //===product added to cart
+  const handleClickAddToCart = () => {
+    history(routePaths.selectedProducts);
+  };
 
   return (
     <section className="header_sec">
       <div className="header_inside_div">
-
         {/* =======left div======= */}
         <div className="header_left_div">
           <span>
@@ -62,7 +67,7 @@ const Header = () => {
 
         {/* =======right div======= */}
         <div className="header_right_div">
-          <span className="cart_span">
+          <span className="cart_span" onClick={handleClickAddToCart}>
             <span>12</span>
             <i className="fa-solid fa-cart-plus fa-xl"></i>
           </span>
@@ -107,7 +112,6 @@ const Header = () => {
             </ul>
           </span>
         </div>
-        
       </div>
     </section>
   );

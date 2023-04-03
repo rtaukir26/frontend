@@ -7,32 +7,41 @@ import SingleProduct from "../pages/SingleProduct/SingleProduct";
 import Login from "../pages/Login/Login";
 import RegisterUser from "../pages/RegisterUser/RegisterUser";
 import { routePaths } from "./routePaths";
+import AddToCart from "../pages/AddToCart/AddToCart";
 
-const AppRoutes=()=> {
+const AppRoutes = () => {
   document.getElementsByTagName("body")[0].classList.add("light-theme");
   return (
-      <BrowserRouter>
-        <Routes>
-          {/* <Route
+    <BrowserRouter>
+      <Routes>
+        {/* <Route
                exact
                path= "/"
                element={<Navigate to= "/login" />}
             /> */}
 
-          <Route element={<PrivateRoute />}>
-            <Route exact path={routePaths.root} element={<Home />} />
-            <Route exact path={routePaths.about} element={<About />} />
-            <Route exact path={routePaths.contact} element={<ContactUs />} />
-            <Route exact path={`${routePaths.product}/:id`} element={<SingleProduct />} />
+        <Route element={<PrivateRoute />}>
+          <Route exact path={routePaths.root} element={<Home />} />
+          <Route exact path={routePaths.about} element={<About />} />
+          <Route exact path={routePaths.contact} element={<ContactUs />} />
+          <Route
+            exact
+            path={`${routePaths.product}/:id`}
+            element={<SingleProduct />}
+          />
+          <Route
+            exact
+            path={routePaths.selectedProducts}
+            element={<AddToCart />}
+          />
 
-            <Route path="*" element={<p>404 not found</p>} />
-          </Route>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<RegisterUser />} />
-        </Routes>
-      </BrowserRouter>
+          <Route path="*" element={<p>404 not found</p>} />
+        </Route>
+        <Route exact path={routePaths.login} element={<Login />} />
+        <Route exact path={routePaths.register} element={<RegisterUser />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default AppRoutes;
-
