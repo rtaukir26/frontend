@@ -9,7 +9,6 @@ const getAllProductsSlice = createSlice({
   initialState,
   reducers: {
     getAllProductsRedux: (state, { paylaod }) => {
-      console.log("allProducts py", paylaod);
       return state.allProducts = paylaod;
     },
   },

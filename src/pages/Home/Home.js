@@ -10,14 +10,16 @@ const Home = () => {
     error: "",
   });
 
-
   useEffect(() => {
     getAllProductsApi()
       .then((res) => {
         if (res?.status === 200) {
+          const newData = res?.data?.products.map((item) => {
+            return { ...item, quantity: 1 };
+          });
           setAllProductsApi({
             loading: false,
-            Products: res?.data?.products,
+            Products: newData,
             error: "",
           });
           // dispatch(getAllProductsRedux(res));
@@ -32,7 +34,6 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-
   return (
     <section className="main_sec">
       <div className="body_outer_div">
