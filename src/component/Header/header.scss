@@ -62,12 +62,12 @@
         cursor: pointer;
         span {
           position: absolute;
-          background-color: #504949;
+          background-color: $navbar-shadow;
           width: 16px;
           height: 16px;
           border-radius: 50%;
           text-align: center;
-          color: #fff;
+          color: $main-white;
           font-size: 12px;
           top: -18px;
           right: -8px;

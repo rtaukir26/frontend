@@ -20,7 +20,6 @@ const SelectedProductCard = ({ setProductInfo, productInfo }) => {
       });
     }
   };
-    console.log("productInfo ", productInfo);
 
   return (
     <div className="product_details_div ">

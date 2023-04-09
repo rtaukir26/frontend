@@ -4,12 +4,14 @@ import { ReactComponent as LogOutIcon } from "../../assets/images/logOutIcon.svg
 import userProfileIcon from "../../assets/images/user.png";
 import searchIcon from "../../assets/images/loupe.png";
 import editIcon from "../../assets/images/edit.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { routePaths } from "../../routes/routePaths";
+import { getAllSelecedProducts } from "../../service/dashBoard";
 
 const Header = () => {
   const history = useNavigate();
   const [userInfo, setUserInfo] = useState({});
+  const [totalAddToCartLength, setTotalAddToCartLength] = useState(null);
 
   //===logout
   const handleClickLogout = () => {
@@ -22,11 +24,21 @@ const Header = () => {
     let userData = JSON.parse(localStorage.getItem("user"));
     setUserInfo(userData);
   };
-  
+
   //===product added to cart
   const handleClickAddToCart = () => {
     history(routePaths.selectedProducts);
   };
+  useEffect(() => {
+    getAllSelecedProducts()
+      .then((res) => {
+        if (res?.status === 200) {
+          setTotalAddToCartLength(res?.data?.addToCart);
+        }
+        console.log("res", res);
+      })
+      .catch((err) => err);
+  }, [totalAddToCartLength]);
 
   return (
     <section className="header_sec">
@@ -68,7 +80,7 @@ const Header = () => {
         {/* =======right div======= */}
         <div className="header_right_div">
           <span className="cart_span" onClick={handleClickAddToCart}>
-            <span>12</span>
+            <span>{totalAddToCartLength?.length}</span>
             <i className="fa-solid fa-cart-plus fa-xl"></i>
           </span>
           <span className="logout_span" tabIndex="0">

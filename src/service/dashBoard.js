@@ -1,4 +1,6 @@
 import axios from "axios";
+import { toast } from "react-toastify";
+
 import { apiEndpoints } from "./apiEndPoint";
 
 export const loginUser = async (userInputValue) => {
@@ -17,6 +19,36 @@ export const loginUser = async (userInputValue) => {
     );
   } catch (err) {
     return err;
+  }
+};
+
+//toast message
+export const notify = (msg, msgStatus) => {
+  if (msgStatus === "success") {
+    toast.success(msg, {
+      // position: "top-right",
+      position: "top-center",
+      autoClose: 500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // icon:"🎇"
+    });
+  } else {
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // icon:"🎇"
+    });
   }
 };
 

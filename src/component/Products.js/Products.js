@@ -5,17 +5,19 @@ import RatingStar from "../RatingStar/RatingStar";
 import {
   addToCartProductApi,
   getSingleCartProduct,
+  notify,
   updateCartProductsApi,
 } from "../../service/dashBoard";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const Products = ({ allProductsApi }) => {
   const history = useNavigate();
-  //navigate to singleProduct page
+
+  //==navigate to singleProduct page
   const handleClickGetSingleProductInfo = (item) => {
     history(`/product/${item._id}`);
   };
-  //handleClick AddToCart
+  //==handleClick AddToCart
   const handleClickAddToCart = (item) => {
     //==get product from cart, if product is already in cart
     getSingleCartProduct(item._id)
@@ -47,35 +49,6 @@ const Products = ({ allProductsApi }) => {
       });
   };
 
-  //===toast msg
-  const notify = (msg, msgStatus) => {
-    if (msgStatus === "success") {
-      toast.success(msg, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        // icon:"🎇"
-      });
-    } else {
-      toast.error(msg, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        // icon:"🎇"
-      });
-    }
-  };
-
   return (
     <div>
       <div>
@@ -90,7 +63,7 @@ const Products = ({ allProductsApi }) => {
           <div className="product_body">
             <ToastContainer
               position="top-right"
-              autoClose={5000}
+              autoClose={1000}
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick

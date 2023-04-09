@@ -1,38 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../../component/Header/Header";
 import { getAllSelecedProducts } from "../../service/dashBoard";
 import SelectedProductCard from "../../component/SelectedProductCard/SelectedProductCard";
+import { getAddToCartAllProductsRedux } from "../../redux/addToCart.slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddToCart = () => {
-  const [productInfo, setProductInfo] = useState({
-    loading: true,
-    error: "",
-    product: {},
-  });
 
-  //getting selected products thro' api
+  const dispatch = useDispatch();
+  const productInfo = useSelector((state) => state?.addToCartSlice);
+
+  //getting selected products thro' api while page rendering
   useEffect(() => {
     getAllSelecedProducts()
       .then((res) => {
-        if (res?.status === 200) {
-          setProductInfo({
-            loading: false,
-            product: res?.data,
-            error: "",
-          });
-        } else if (res?.message === "Network Error") {
-          setProductInfo({
-            loading: true,
-            product: {},
-            error: "Network Error",
-          });
-        } else {
-          setProductInfo({
-            loading: true,
-            product: {},
-            error: "Something went wrong!",
-          });
-        }
+        dispatch(getAddToCartAllProductsRedux(res));
       })
       .catch((err) => {
         return err;
@@ -44,11 +26,10 @@ const AddToCart = () => {
     <section className="main_sec">
       <div className="body_outer_div">
         <div className="body_inner_div">
-            <Header />
-            <SelectedProductCard
-              setProductInfo={setProductInfo}
-              productInfo={productInfo}
-            />
+          <Header />
+          <SelectedProductCard
+            productInfo={productInfo}
+          />
         </div>
       </div>
     </section>

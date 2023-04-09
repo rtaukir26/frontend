@@ -2,7 +2,13 @@ import RatingStar from "../../component/RatingStar/RatingStar";
 import watchImg from "../../assets/images/watch.webp";
 import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
-import { addToCartProductApi } from "../../service/dashBoard";
+import {
+  addToCartProductApi,
+  getSingleCartProduct,
+  notify,
+  updateCartProductsApi,
+} from "../../service/dashBoard";
+import { ToastContainer, toast } from "react-toastify";
 
 const ProductCard = ({ setProductInfo, productInfo }) => {
   //==handleClick Incr product Qty
@@ -24,12 +30,35 @@ const ProductCard = ({ setProductInfo, productInfo }) => {
 
   //handleClick Add To Cart
   const handleClickAddToCart = () => {
-    addToCartProductApi(productInfo?.product)
-      .then((res) => res)
+
+    //==get product from cart, if product is already in cart
+    getSingleCartProduct(productInfo.product._id)
+      .then((res) => {
+        if (res?.status === 200) {
+
+          //==send updated product to cart
+          updateCartProductsApi(productInfo.product._id, productInfo.product)
+            .then((res) => {
+              if (res?.status === 200) {
+                notify("Product successfully added to cart", "success");
+                return res;
+              }
+            })
+            .catch((err) => {
+              return err;
+            });
+        } else {
+
+          //==adding new product to cart, if product is not in cart
+          addToCartProductApi(productInfo.product);
+          notify("Product successfully added to cart", "success");
+        }
+      })
       .catch((err) => {
         return err;
       });
   };
+
   return (
     <div className="product_details_div ">
       {productInfo?.loading ? (
@@ -41,6 +70,20 @@ const ProductCard = ({ setProductInfo, productInfo }) => {
         </>
       ) : productInfo?.product !== undefined && productInfo?.product !== {} ? (
         <div className="product_card">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover={false}
+            theme="light"
+            zIndex={1}
+            // icon={false}
+          />
           <div className="card_left_img_div">
             <img src={watchImg} alt="watch" />
           </div>
