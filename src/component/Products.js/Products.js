@@ -2,24 +2,78 @@ import { useNavigate } from "react-router-dom";
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
 import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import RatingStar from "../RatingStar/RatingStar";
-import axios from "axios";
+import {
+  addToCartProductApi,
+  getSingleCartProduct,
+  updateCartProductsApi,
+} from "../../service/dashBoard";
+import { ToastContainer, toast } from "react-toastify";
 
 const Products = ({ allProductsApi }) => {
   const history = useNavigate();
-  //
+  //navigate to singleProduct page
   const handleClickGetSingleProductInfo = (item) => {
     history(`/product/${item._id}`);
   };
   //handleClick AddToCart
   const handleClickAddToCart = (item) => {
-    // history(`/product/${item._id}`)
-    axios
-      .post("http://localhost:4000/api/v1//add-selected-product", item)
-      .then((res) => console.log("res", res))
+    //==get product from cart, if product is already in cart
+    getSingleCartProduct(item._id)
+      .then((res) => {
+        if (res?.status === 200) {
+          res.data.singleProduct.quantity += 1;
+          let updateProduct = res.data.singleProduct;
+
+          //==send updated product to cart
+          updateCartProductsApi(item._id, updateProduct)
+            .then((res) => {
+              if (res?.status === 200) {
+                notify("Product successfully added to cart", "success");
+
+                return updateProduct;
+              }
+            })
+            .catch((err) => {
+              return err;
+            });
+        } else {
+          //==adding new product to cart, if product is not in cart
+          addToCartProductApi(item);
+          notify("Product successfully added to cart", "success");
+        }
+      })
       .catch((err) => {
         return err;
       });
-    console.log("res item", item);
+  };
+
+  //===toast msg
+  const notify = (msg, msgStatus) => {
+    if (msgStatus === "success") {
+      toast.success(msg, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // icon:"🎇"
+      });
+    } else {
+      toast.error(msg, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // icon:"🎇"
+      });
+    }
   };
 
   return (
@@ -34,6 +88,20 @@ const Products = ({ allProductsApi }) => {
           </>
         ) : allProductsApi?.Products?.length > 0 ? (
           <div className="product_body">
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover={false}
+              theme="light"
+              zIndex={1}
+              // icon={false}
+            />
             {allProductsApi?.Products?.map((item, i) => (
               <div key={i} className="card">
                 <h5>{item.name}</h5>

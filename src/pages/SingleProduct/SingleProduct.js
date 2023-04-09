@@ -13,15 +13,14 @@ const SingleProduct = () => {
     product: {},
   });
   const { id } = useParams();
-
+  //getting param id, and get product details
   useEffect(() => {
     getSingleProductApi(id)
       .then((res) => {
-        // console.log("productInfo res", res);
         if (res?.status === 200) {
           setProductInfo({
             loading: false,
-            product: { ...res?.data?.product, quantities: 1 },
+            product: { ...res?.data?.product, quantity: 1 },
             error: "",
           });
         } else if (res?.message === "Network Error") {
@@ -40,7 +39,6 @@ const SingleProduct = () => {
       })
       .catch((err) => {
         return err;
-        // console.log("err",err);
       });
     // below line stoping the warning of "React Hook useEffect has a missing dependency"
     //  eslint-disable-next-line react-hooks/exhaustive-deps

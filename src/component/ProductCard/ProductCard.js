@@ -2,27 +2,34 @@ import RatingStar from "../../component/RatingStar/RatingStar";
 import watchImg from "../../assets/images/watch.webp";
 import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import CommonNetworkError from "../CommonNetworkError/CommonNetworkError";
+import { addToCartProductApi } from "../../service/dashBoard";
 
 const ProductCard = ({ setProductInfo, productInfo }) => {
-  
-    //==handleClick Incr product Qty
+  //==handleClick Incr product Qty
   const handleClickIncrQty = () => {
-    productInfo.product.quantities += 1;
+    productInfo.product.quantity += 1;
     setProductInfo((productInfo) => {
       return { ...productInfo };
     });
   };
   //==handleClick Decr product Qty
   const handleClickDecrQty = () => {
-    if (productInfo.product.quantities > 1) {
-      productInfo.product.quantities -= 1;
+    if (productInfo.product.quantity > 1) {
+      productInfo.product.quantity -= 1;
       setProductInfo((productInfo) => {
         return { ...productInfo };
       });
     }
   };
-//   console.log("productInfo ", productInfo);
 
+  //handleClick Add To Cart
+  const handleClickAddToCart = () => {
+    addToCartProductApi(productInfo?.product)
+      .then((res) => res)
+      .catch((err) => {
+        return err;
+      });
+  };
   return (
     <div className="product_details_div ">
       {productInfo?.loading ? (
@@ -49,17 +56,17 @@ const ProductCard = ({ setProductInfo, productInfo }) => {
             <div className="quantity_div">
               <strong>Quantity</strong>
               <span onClick={handleClickDecrQty}>-</span>
-              <span>{productInfo?.product?.quantities}</span>
+              <span>{productInfo?.product?.quantity}</span>
 
               <span onClick={handleClickIncrQty}>+</span>
               <strong>
                 Total Price &#8377;
-                {productInfo?.product?.price * productInfo?.product?.quantities}
+                {productInfo?.product?.price * productInfo?.product?.quantity}
               </strong>
             </div>
 
             <div className="btn_grp">
-              <button>Add to cart</button>
+              <button onClick={handleClickAddToCart}>Add to cart</button>
               <button>Buy now</button>
             </div>
           </div>

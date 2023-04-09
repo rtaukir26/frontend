@@ -1,5 +1,5 @@
 import { ReactComponent as UserEmailIcon } from "../../assets/images/userEmailWhite.svg";
-import { ReactComponent as UserPwdIcon } from "../../assets/images/key-solid.svg";
+// import { ReactComponent as UserPwdIcon } from "../../assets/images/key-solid.svg";
 import { ReactComponent as OpenEyeIcon } from "../../assets/images/eye-regular.svg";
 import { ReactComponent as OpenEyeSlashIcon } from "../../assets/images/eye-slash-regular.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../../service/dashBoard";
-
+// import pdfPage from "../../assets/images/DTC_056016_Diagnostics_procedure.html";
 const initialState = {
   email: "",
   password: "",
@@ -27,6 +27,7 @@ const Login = () => {
       return { ...pre, [e.target.name]: e.target.value };
     });
   };
+  //====toast msg
   const notify = (msg) =>
     toast.error(msg, {
       position: "top-right",
@@ -203,6 +204,19 @@ const Login = () => {
           </div>
         </div>
       </section>
+      {/* <iframe
+        // src="https://bluebinaries-my.sharepoint.com/personal/faisal_mahmood_bluebinaries_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2FDTC%5F056016%5FDiagnostics%5Fprocedure%2Ehtml&parent=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1"
+        src="https://developmentbb.blob.core.windows.net/bcm/Fuse.gif"
+        style={{height:"200px",width:"300px"}}
+        title="Iframe Example"
+      ></iframe> */}
+      {/* <embed
+        type="text/html"
+        // src="https://bluebinaries-my.sharepoint.com/personal/faisal_mahmood_bluebinaries_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2FDTC%5F056016%5FDiagnostics%5Fprocedure%2Ehtml&parent=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1"
+        // src={pdfPage}
+        width="500"
+        height="200"
+      ></embed> */}
     </section>
   );
 };

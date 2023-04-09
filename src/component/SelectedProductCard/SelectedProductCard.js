@@ -50,12 +50,12 @@ const SelectedProductCard = ({ setProductInfo, productInfo }) => {
                 <div className="quantity_div">
                   <strong>Quantity</strong>
                   <span onClick={handleClickDecrQty}>-</span>
-                  <span>{item?.quantities}</span>
+                  <span>{item?.quantity}</span>
 
                   <span onClick={handleClickIncrQty}>+</span>
                   <strong>
                     Total Price &#8377;
-                    {item?.price * 1}
+                    {item?.price * item?.quantity}
                   </strong>
                 </div>
 
