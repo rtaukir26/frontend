@@ -7,6 +7,8 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../../service/dashBoard";
+import { Preview, print } from "react-html2pdf";
+
 // import pdfPage from "../../assets/images/DTC_056016_Diagnostics_procedure.html";
 const initialState = {
   email: "",
@@ -118,6 +120,14 @@ const Login = () => {
     }
   };
 
+  //pdf displaying
+
+  // const html = await pdf2html.html('sample.pdf');
+  // const html = pdf2html.html(
+  //   "https://developmentbb.blob.core.windows.net/bcm/DTC_056016_Diagnostics_procedure.pdf"
+  // );
+  // console.log("html", html);
+
   return (
     <section className="body_inner_div">
       <section className="body_outer_div">
@@ -204,19 +214,6 @@ const Login = () => {
           </div>
         </div>
       </section>
-      {/* <iframe
-        // src="https://bluebinaries-my.sharepoint.com/personal/faisal_mahmood_bluebinaries_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2FDTC%5F056016%5FDiagnostics%5Fprocedure%2Ehtml&parent=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1"
-        src="https://developmentbb.blob.core.windows.net/bcm/Fuse.gif"
-        style={{height:"200px",width:"300px"}}
-        title="Iframe Example"
-      ></iframe> */}
-      {/* <embed
-        type="text/html"
-        // src="https://bluebinaries-my.sharepoint.com/personal/faisal_mahmood_bluebinaries_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files%2FDTC%5F056016%5FDiagnostics%5Fprocedure%2Ehtml&parent=%2Fpersonal%2Ffaisal%5Fmahmood%5Fbluebinaries%5Fcom%2FDocuments%2FMicrosoft%20Teams%20Chat%20Files&ga=1"
-        // src={pdfPage}
-        width="500"
-        height="200"
-      ></embed> */}
     </section>
   );
 };
